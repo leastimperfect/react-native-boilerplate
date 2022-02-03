@@ -51,10 +51,6 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
   );
 }
 
-//const doubleNum = function( num ) { return 2 * num; };
-const divide = ( { divident, divisor } ) => divident / divisor;
-
-
 /**
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
  * https://reactnavigation.org/docs/bottom-tab-navigator

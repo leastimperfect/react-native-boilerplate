@@ -19,72 +19,80 @@ import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
+/**
+ * A root stack navigator is often used for displaying modals on top of all other content.
+ * https://reactnavigation.org/docs/modal
+ */
+const MainStack = createNativeStackNavigator<RootStackParamList>();
+
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
       theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <RootNavigator />
+      <MainStack.Navigator>
+
+        {/* region Top level routes */}
+        <MainStack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
+        <MainStack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+        {/* endregion Top level routes */}
+
+        <MainStack.Group screenOptions={{ presentation: 'modal' }}>
+
+          {/* region Modals */}
+          <MainStack.Screen name="Modal" component={ModalScreen} />
+          {/* endregion Modals */}
+
+        </MainStack.Group>
+
+      </MainStack.Navigator>
+
     </NavigationContainer>
   );
 }
 
-/**
- * A root stack navigator is often used for displaying modals on top of all other content.
- * https://reactnavigation.org/docs/modal
- */
-const Stack = createNativeStackNavigator<RootStackParamList>();
+//const doubleNum = function( num ) { return 2 * num; };
+const divide = ( { divident, divisor } ) => divident / divisor;
 
-function RootNavigator() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
-      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
-      </Stack.Group>
-    </Stack.Navigator>
-  );
-}
 
 /**
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
  * https://reactnavigation.org/docs/bottom-tab-navigator
  */
-const BottomTab = createBottomTabNavigator<RootTabParamList>();
+const MainTabs = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
   const colorScheme = useColorScheme();
 
   return (
-    <BottomTab.Navigator
-      initialRouteName="TabOne"
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
-      }}>
-      <BottomTab.Screen
+    <MainTabs.Navigator initialRouteName="TabOne"
+                        screenOptions={{tabBarActiveTintColor: Colors[colorScheme].tint,}}>
+      <MainTabs.Screen
         name="TabOne"
         component={TabOneScreen}
+
         options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
           title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate('Modal')}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}>
+          tabBarIcon: ({ color }) => <TabBarIcon name="heart" color={color} />,
+          headerLeft: () => {
+            return <Pressable
+              onPress={() => navigation.navigate( 'Modal' )}
+              style={( {pressed} ) => (
+                {
+                  opacity: pressed ? 0.5 : 1,
+                }
+              )}>
               <FontAwesome
                 name="info-circle"
                 size={25}
                 color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
+                style={{marginRight: 15, marginLeft: 15}}
               />
             </Pressable>
-          ),
+          },
         })}
       />
-      <BottomTab.Screen
+      <MainTabs.Screen
         name="TabTwo"
         component={TabTwoScreen}
         options={{
@@ -92,7 +100,7 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
-    </BottomTab.Navigator>
+    </MainTabs.Navigator>
   );
 }
 

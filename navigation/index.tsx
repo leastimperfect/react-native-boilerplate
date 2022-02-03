@@ -10,6 +10,7 @@ import {ColorSchemeName} from 'react-native';
 
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
+import LoginScreen from '../screens/LoginScreen';
 import {RootStackParamList} from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import TabsNavigator from './TabsNavigator';
@@ -39,12 +40,14 @@ export default function Navigation( {colorScheme}: { colorScheme: ColorSchemeNam
 
 									{/* region Modals */}
 									<MainStack.Screen name="Modal" component={ModalScreen} />
+									<MainStack.Screen name="Login" component={LoginScreen} />
 									{/* endregion Modals */}
 
 								</MainStack.Group>
 							</>
 							:
 							<>
+								<MainStack.Screen name="Login" component={LoginScreen} options={{headerShown: false}} />
 							</>
 						}
 

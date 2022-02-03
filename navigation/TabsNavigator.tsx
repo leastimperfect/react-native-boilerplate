@@ -4,7 +4,6 @@ import {FontAwesome} from '@expo/vector-icons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {RootTabParamList, RootTabScreenProps} from '../types';
-import useColorScheme from '../hooks/useColorScheme';
 import Colors from '../constants/Colors';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
@@ -26,11 +25,9 @@ function TabBarIcon(props: {
 const MainTabs = createBottomTabNavigator<RootTabParamList>();
 
 function TabsNavigator() {
-	const colorScheme = useColorScheme();
-
 	return (
 		<MainTabs.Navigator initialRouteName="TabOne"
-												screenOptions={{tabBarActiveTintColor: Colors[colorScheme].tint,}}>
+												screenOptions={{tabBarActiveTintColor: Colors.tint,}}>
 			<MainTabs.Screen
 				name="TabOne"
 				component={TabOneScreen}
@@ -49,7 +46,7 @@ function TabsNavigator() {
 							<FontAwesome
 								name="info-circle"
 								size={25}
-								color={Colors[colorScheme].text}
+								color={Colors.text}
 								style={{marginRight: 15, marginLeft: 15}}
 							/>
 						</Pressable>

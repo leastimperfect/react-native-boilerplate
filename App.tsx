@@ -4,12 +4,10 @@ import {Text, View} from 'react-native';
 import {AppStateManager} from './AppStateManager';
 
 import useCachedResources from './hooks/useCachedResources';
-import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 
 export default function App() {
 	const isLoadingComplete = useCachedResources(); // Loads fonts
-	const colorScheme = useColorScheme(); // 'dark' || 'light'
 
 	if ( !isLoadingComplete ) {
     return <View style={{height: '100%', alignItems: 'center', justifyContent: 'center'}}>
@@ -19,7 +17,7 @@ export default function App() {
 		return (
 			<SafeAreaProvider>
 				<AppStateManager>
-					<Navigation colorScheme={colorScheme}/>
+					<Navigation/>
 					<StatusBar/>
 				</AppStateManager>
 			</SafeAreaProvider>

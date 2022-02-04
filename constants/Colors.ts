@@ -6,6 +6,7 @@ const tintColorDark = '#fff';
 const Colors = {
 	text: '#fff',
 	inputBackground: '#182b33',
+	inputBorder: '#182b33',
 	background: '#0f1b20',
 	tint: tintColorDark,
 	tabIconDefault: '#ccc',

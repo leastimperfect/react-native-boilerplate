@@ -4,23 +4,17 @@ const appStateContext = createContext( {
 	user: null,
 } );
 
-export class AppStateManager extends React.Component<any, any> {
-
-	state = {
-		user: null,
-	};
-
-	provideState() {
-		return {
-			...this.state,
-		};
-	}
-
-	render() {
-		return <appStateContext.Provider value={this.provideState()}>
-			{this.props.children}
-		</appStateContext.Provider>
-	}
-}
-
+export const AppProvider = appStateContext.Provider;
 export const AppConsumer = appStateContext.Consumer;
+
+export class AppStateManager {
+	private state: any;
+	private setState: (s: any) => void;
+
+	constructor( state: any, setState: (s: any) => void ) {
+		this.state = state;
+		this.setState = setState;
+	}
+
+
+}

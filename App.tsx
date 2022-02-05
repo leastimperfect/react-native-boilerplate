@@ -42,7 +42,7 @@ export default class App extends React.Component<any, any> {
 	provideState() {
 		return {
 			...this.state,
-			setState: ( newState: {} ) => this.setState( newState )
+			update: ( newState: {} ) => this.setState( newState )
 		};
 	}
 

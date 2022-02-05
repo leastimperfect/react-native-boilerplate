@@ -9,7 +9,7 @@ export default function AppLogo( props: { style?: Array<any> | {} } ) {
   }
 
   return (
-    <Image source={require( '../assets/images/logo.png' )} {...imageProps}>
+    <Image source={require( '../../assets/images/logo.png' )} {...imageProps}>
     </Image>
   );
 }

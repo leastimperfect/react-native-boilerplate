@@ -1,10 +1,11 @@
-import React, {ReactComponentElement, useState} from 'react';
-import {Pressable, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
+import React, {ReactComponentElement, useEffect, useState} from 'react';
+import {Pressable, TextInput} from 'react-native';
 
 import {Text, View} from '../components/Themed';
-import {RootStackScreenProps} from '../types';
+import {RootStackParamList, RootStackScreenProps} from '../types';
 import styles from '../styles';
 import AppLogo from '../components/AppLogo';
+import {hocUserState} from '../hoc/hocUserState';
 
 type FieldProps = {
 	children: ReactComponentElement<any>,
@@ -21,12 +22,25 @@ function Field( props: FieldProps ) {
 
 }
 
-export default function LoginScreen( {navigation}: RootStackScreenProps<'NotFound'> ) {
+interface LoginScreenProps<route extends keyof RootStackParamList> extends RootStackScreenProps<route> {
+	userLogin: ( user: string, pass: string ) => Promise<any>
+	user: any,
+};
+
+function LoginScreen( {navigation, user, userLogin}: LoginScreenProps<'Login'> ) {
+
+	console.log( {navigation, user, userLogin} );
 
 	const [fieldValues, setFieldValues] = useState( {
-		username: '',
-		password: '',
+		username: 'JonDoe', // @todo Remove after dev
+		password: 'smdflkscvjsdf', // @todo Remove after dev
 	} );
+
+	useEffect( () => {
+		if ( user ) {
+			navigation.navigate( 'Root' );
+		}
+	}, [user] )
 
 	return (
 		<View style={[styles.wrapper, styles.hvCenter]}>
@@ -44,7 +58,7 @@ export default function LoginScreen( {navigation}: RootStackScreenProps<'NotFoun
 			</Field>
 
 			<Field>
-				<Pressable style={[styles.button]} onPress={e => { alert( `Logging you in ${fieldValues.username}, your password is ${fieldValues.password}.` ) }}>
+				<Pressable style={[styles.button]} onPress={e => userLogin( fieldValues.username, fieldValues.password )}>
 					<Text>Login</Text>
 				</Pressable>
 			</Field>
@@ -52,3 +66,5 @@ export default function LoginScreen( {navigation}: RootStackScreenProps<'NotFoun
 		</View>
 	);
 }
+
+export default hocUserState( LoginScreen );

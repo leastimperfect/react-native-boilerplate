@@ -4,6 +4,7 @@ import {Pressable, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 import {Text, View} from '../components/Themed';
 import {RootStackScreenProps} from '../types';
 import styles from '../styles';
+import AppLogo from '../components/AppLogo';
 
 type FieldProps = {
 	children: ReactComponentElement<any>,
@@ -29,6 +30,8 @@ export default function LoginScreen( {navigation}: RootStackScreenProps<'NotFoun
 
 	return (
 		<View style={[styles.wrapper, styles.hvCenter]}>
+
+			<AppLogo style={{width: '50%',}} />
 
 			<Field label='Username'>
 				<TextInput style={[styles.input]} value={fieldValues.username}

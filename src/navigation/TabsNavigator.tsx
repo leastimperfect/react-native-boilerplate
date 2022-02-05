@@ -4,7 +4,7 @@ import {FontAwesome} from '@expo/vector-icons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {RootTabParamList, RootTabScreenProps} from '../types';
-import Colors from '../style/Colors';
+import Colors from '../styles/Colors';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 

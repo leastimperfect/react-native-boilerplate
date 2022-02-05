@@ -1,14 +1,19 @@
-import React, {useState} from 'react';
+import React, {ReactComponentElement, useState} from 'react';
 import {Pressable, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 
 import {Text, View} from '../components/Themed';
 import {RootStackScreenProps} from '../types';
-import styles from '../appStyles';
+import styles from '../styles';
 
-function Field( {children, label = '' } ) {
+type FieldProps = {
+	children: ReactComponentElement<any>,
+	label?: string
+};
+
+function Field( props: FieldProps ) {
 	return <View style={[styles.field]}>
-		{ label ? <Text style={[styles.fieldLabel]}>{label}</Text> : null }
-		{children}
+		{ props.label ? <Text style={[styles.fieldLabel]}>{props.label}</Text> : null }
+		{props.children}
 	</View>;
 
 

@@ -14,7 +14,7 @@ import {RootStackParamList} from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import TabsNavigator from './TabsNavigator';
 import {AppConsumer} from '../AppStateManager';
-import {AppTheme} from '../constants/Colors';
+import {AppTheme} from '../style/Colors';
 
 /**
  * A root stack navigator is often used for displaying modals on top of all other content.

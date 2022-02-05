@@ -28,7 +28,7 @@ export default class App extends React.Component<any, any> {
 		Font
 			.loadAsync( {
 				...FontAwesome.font,
-				'space-mono': require( './src/assets/fonts/SpaceMono-Regular.ttf' ),
+				'space-mono': require( './assets/fonts/SpaceMono-Regular.ttf' ),
 			} )
 			.then( () => {
 				SplashScreen.hideAsync();

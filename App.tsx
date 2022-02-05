@@ -1,12 +1,14 @@
 import React from 'react';
 import {StatusBar} from 'expo-status-bar';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {AppProvider} from './src/AppStateManager';
-
-import Navigation from './src/navigation';
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
 import {FontAwesome} from '@expo/vector-icons';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+
+
+import {AppProvider} from './src/AppStateManager';
+
+import Navigation from './src/navigation';
 
 export default class App extends React.Component<any, any> {
 	state: any = {
@@ -26,7 +28,7 @@ export default class App extends React.Component<any, any> {
 		Font
 			.loadAsync( {
 				...FontAwesome.font,
-				'space-mono': require( '../assets/fonts/SpaceMono-Regular.ttf' ),
+				'space-mono': require( './src/assets/fonts/SpaceMono-Regular.ttf' ),
 			} )
 			.then( () => {
 				SplashScreen.hideAsync();

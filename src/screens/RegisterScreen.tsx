@@ -8,19 +8,21 @@ import AppLogo from '../components/AppLogo';
 import {hocUserState} from '../hoc/hocUserState';
 import Field from '../components/Field';
 
-interface LoginScreenProps<route extends keyof RootStackParamList> extends RootStackScreenProps<route> {
-	userLogin: ( user: {} ) => Promise<any>
+interface RegisterScreenProps<route extends keyof RootStackParamList> extends RootStackScreenProps<route> {
+	userRegister: ( data: {} ) => Promise<any>
 	user: any,
 };
 
-function LoginScreen( {navigation, user, userLogin}: LoginScreenProps<'Login'> ) {
+function RegisterScreen( {navigation, user, userRegister}: RegisterScreenProps<'Register'> ) {
 
 	const [fieldValues, setFieldValues] = useState( {
-		username: 'JonDoe', // @todo Remove after dev
-		password: 'smdflkscvjsdf', // @todo Remove after dev
+		name: '',
+		username: '',
+		password: '',
+		passwordConfirm: '',
 	} );
 
-	const { username, password} = fieldValues;
+	const {name, username, password, passwordConfirm} = fieldValues;
 
 	useEffect( () => {
 		if ( user ) {
@@ -33,6 +35,11 @@ function LoginScreen( {navigation, user, userLogin}: LoginScreenProps<'Login'> )
 
 			<AppLogo style={{width: '50%',}}/>
 
+			<Field label='Full name' inputProps={{
+				value: name,
+				onChangeText: ( input: string ) => setFieldValues( {...fieldValues, name: input} ),
+			}} />
+
 			<Field label='Username' inputProps={{
 				value: username,
 				onChangeText: ( input: string ) => setFieldValues( {...fieldValues, username: input} ),
@@ -44,8 +51,16 @@ function LoginScreen( {navigation, user, userLogin}: LoginScreenProps<'Login'> )
 				onChangeText: ( input: string ) => setFieldValues( {...fieldValues, password: input} ),
 			}}/>
 
+			<Field label='Confirm password' inputProps={{
+				secureTextEntry: true,
+				value: passwordConfirm,
+				onChangeText: ( input: string ) => setFieldValues( {...fieldValues, passwordConfirm: input} ),
+			}}/>
+
 			<Field>
-				<AppButton title='Login' onPress={e => userLogin( {username, password} )} />
+				<AppButton title='Register' onPress={e => userRegister( {
+					name, username, password, passwordConfirm
+				} )} />
 			</Field>
 
 			<Field>
@@ -56,4 +71,4 @@ function LoginScreen( {navigation, user, userLogin}: LoginScreenProps<'Login'> )
 	);
 }
 
-export default hocUserState( LoginScreen );
+export default hocUserState( RegisterScreen );

@@ -9,6 +9,11 @@ type FieldProps = {
 	inputProps?: any,
 };
 
+/**
+ * Adds field on the forms
+ * @param props
+ * @constructor
+ */
 export default function Field( props: FieldProps ) {
 	if ( props.inputProps ) {
 		props.inputProps.style = props.inputProps.style || [styles.input];

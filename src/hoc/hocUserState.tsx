@@ -4,26 +4,75 @@ import {AppConsumer} from '../AppStateManager';
 export function hocUserState( WrappedComponent: typeof Component | ( ( p: any ) => JSX.Element ) ) : FunctionComponent {
 
 	class HOCUserState extends Component< {user: any, update: (state: any) => void} > {
+
+		private loginFields = {
+			username: 'Username',
+			password: 'Password',
+		};
+
+		private registrationFields = {
+			name: 'Full name',
+			username: 'Username',
+			password: 'Password',
+			passwordConfirm: 'Password confirmation',
+		};
+
 		constructor( props: any ) {
 			super( props );
 		}
 
-		userLogin = ( userName: string, password: string ) : Promise<any> => {
+		/**
+		 *
+		 * @param formData
+		 * @param fields Object contains
+		 * @param fieldMessage
+		 */
+		requiredInputValid( formData: any, fields: any, fieldMessage = false ) {
+			console.log( formData, fields );
+
+			for ( const fieldKey in fields ) {
+				const msg: string = fieldMessage ? fields[fieldKey] : `${fields[fieldKey]} is required.`;
+
+				if ( ! formData[fieldKey] ) {
+					alert( msg );
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		userRegister = ( data: { name: string, username: string, password: string, passwordConfirm: string } ) => {
 			// Try to log in with username and password
 			return new Promise( res => {
-				this.props.update( {
-					user: {
-						userName,
-						name: 'Jon Doe',
-						avatar: '',
-					}
-				} );
-				if ( ! userName ) {
-					alert( 'Username is required.' );
-				} else if ( ! password ) {
-					alert( 'Password is required.' );
-				} else {
-					console.log( `Logged in as ${userName} with password ${'*'.repeat( password.length )}` );
+				if ( this.requiredInputValid( data, this.registrationFields ) ) {
+
+					alert( 'Todo: Registration logic.' );
+					this.props.update( {
+						user: {
+							userName: data.username,
+							name: 'Jon Doe',
+							avatar: '',
+						}
+					} );
+					return res( true );
+				}
+				res( false );
+			} );
+
+		}
+
+		userLogin = ( data: { username: string, password: string } ) : Promise<boolean> => {
+			// Try to log in with username and password
+			return new Promise( res => {
+				if ( this.requiredInputValid( data, this.loginFields ) ) {
+					this.props.update( {
+						user: {
+							username: data.username,
+							name: 'Jon Doe',
+							avatar: '',
+						}
+					} );
 					return res( true );
 				}
 				res( false );
@@ -34,6 +83,7 @@ export function hocUserState( WrappedComponent: typeof Component | ( ( p: any ) 
 			return <WrappedComponent
 				{...this.props}
 				userLogin={this.userLogin}
+				userRegister={this.userRegister}
 			/>;
 		}
 	}

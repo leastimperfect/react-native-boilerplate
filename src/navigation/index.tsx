@@ -10,6 +10,7 @@ import * as React from 'react';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import LoginScreen from '../screens/LoginScreen';
+import RegisterScreen from '../screens/RegisterScreen';
 import {RootStackParamList} from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import TabsNavigator from './TabsNavigator';
@@ -25,6 +26,7 @@ const MainStack = createNativeStackNavigator<RootStackParamList>();
 export default function Navigation() {
 	const userSignScreensStack = <MainStack.Group>
 		<MainStack.Screen name="Login" component={LoginScreen}/>
+		<MainStack.Screen name="Register" component={RegisterScreen}/>
 	</MainStack.Group>;
 
 	return (

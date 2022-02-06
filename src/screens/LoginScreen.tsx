@@ -6,21 +6,7 @@ import {RootStackParamList, RootStackScreenProps} from '../types';
 import styles from '../styles';
 import AppLogo from '../components/AppLogo';
 import {hocUserState} from '../hoc/hocUserState';
-
-type FieldProps = {
-	children: ReactComponentElement<any>,
-	label?: string
-};
-
-function Field( props: FieldProps ) {
-	return <View style={[styles.field]}>
-		{ props.label ? <Text style={[styles.fieldLabel]}>{props.label}</Text> : null }
-		{props.children}
-	</View>;
-
-
-
-}
+import Field from '../components/Field';
 
 interface LoginScreenProps<route extends keyof RootStackParamList> extends RootStackScreenProps<route> {
 	userLogin: ( user: string, pass: string ) => Promise<any>
@@ -45,17 +31,18 @@ function LoginScreen( {navigation, user, userLogin}: LoginScreenProps<'Login'> )
 	return (
 		<View style={[styles.wrapper, styles.hvCenter]}>
 
-			<AppLogo style={{width: '50%',}} />
+			<AppLogo style={{width: '50%',}}/>
 
-			<Field label='Username'>
-				<TextInput style={[styles.input]} value={fieldValues.username}
-									 onChangeText={input => setFieldValues( {...fieldValues, username: input,} )}/>
-			</Field>
+			<Field label='Username' inputProps={{
+				value: fieldValues.username,
+				onChangeText: ( input: string ) => setFieldValues( {...fieldValues, username: input} ),
+			}} />
 
-			<Field label='Password'>
-				<TextInput secureTextEntry={true} style={[styles.input]} value={fieldValues.password}
-									 onChangeText={input => setFieldValues( {...fieldValues, password: input,} )}/>
-			</Field>
+			<Field label='Password' inputProps={{
+				secureTextEntry: true,
+				value: fieldValues.password,
+				onChangeText: ( input: string ) => setFieldValues( {...fieldValues, password: input} ),
+			}}/>
 
 			<Field>
 				<Pressable style={[styles.button]} onPress={e => userLogin( fieldValues.username, fieldValues.password )}>

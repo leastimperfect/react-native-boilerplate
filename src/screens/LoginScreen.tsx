@@ -1,7 +1,7 @@
 import React, {ReactComponentElement, useEffect, useState} from 'react';
-import {Pressable, TextInput} from 'react-native';
+import {Button, Pressable, TextInput} from 'react-native';
 
-import {Text, View} from '../components/Themed';
+import {AppButton, AppButton2, Text, View} from '../components/Themed';
 import {RootStackParamList, RootStackScreenProps} from '../types';
 import styles from '../styles';
 import AppLogo from '../components/AppLogo';
@@ -14,8 +14,6 @@ interface LoginScreenProps<route extends keyof RootStackParamList> extends RootS
 };
 
 function LoginScreen( {navigation, user, userLogin}: LoginScreenProps<'Login'> ) {
-
-	console.log( {navigation, user, userLogin} );
 
 	const [fieldValues, setFieldValues] = useState( {
 		username: 'JonDoe', // @todo Remove after dev
@@ -45,9 +43,7 @@ function LoginScreen( {navigation, user, userLogin}: LoginScreenProps<'Login'> )
 			}}/>
 
 			<Field>
-				<Pressable style={[styles.button]} onPress={e => userLogin( fieldValues.username, fieldValues.password )}>
-					<Text>Login</Text>
-				</Pressable>
+				<AppButton title='Login' onPress={e => userLogin( fieldValues.username, fieldValues.password )} />
 			</Field>
 
 		</View>

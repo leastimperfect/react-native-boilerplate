@@ -4,7 +4,7 @@ import React, {ReactComponentElement} from 'react';
 import {TextInput} from 'react-native';
 
 type FieldProps = {
-	children?: ReactComponentElement<any>,
+	children?: ReactComponentElement<any> | Array<ReactComponentElement<any>>,
 	label?: string,
 	inputProps?: any,
 };

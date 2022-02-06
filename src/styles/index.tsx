@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 		padding: 10,
 		color: Colors.text,
 		width: '100%',
-		marginTop: 16,
+		marginTop: 8,
 	},
 
 	button: {
@@ -44,11 +44,23 @@ const styles = StyleSheet.create({
 		padding: 10,
 		color: Colors.text,
 		width: '100%',
-		marginTop: 16,
+		marginTop: 8,
+	},
+
+	buttonPressed: {
+		opacity: .8,
+	},
+
+	buttonSecondary: {
+		backgroundColor: AppTheme.colors.notification,
+	},
+
+	buttonSecondaryPressed: {
+		opacity: .8,
 	},
 
 	field: {
-		marginTop: 24,
+		marginTop: 16,
 		alignItems: 'flex-start',
 		width: '100%',
 	},

@@ -24,9 +24,9 @@ import {AppTheme} from '../styles/Colors';
 const MainStack = createNativeStackNavigator<RootStackParamList>();
 
 export default function Navigation() {
-	const userSignScreensStack = <MainStack.Group>
-		<MainStack.Screen name="Login" component={LoginScreen}/>
-		<MainStack.Screen name="Register" component={RegisterScreen}/>
+	const userSignScreensStack = <MainStack.Group disableHeader={true}>
+		<MainStack.Screen name="Register" component={RegisterScreen} options={{headerShown: false}}/>
+		<MainStack.Screen name="Login" component={LoginScreen} options={{headerShown: false}}/>
 	</MainStack.Group>;
 
 	return (

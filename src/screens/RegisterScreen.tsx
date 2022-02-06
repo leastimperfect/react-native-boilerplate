@@ -64,7 +64,7 @@ function RegisterScreen( {navigation, user, userRegister}: RegisterScreenProps<'
 			</Field>
 
 			<Field>
-				<AppButton2 title='Register' onPress={e => navigation.navigate( 'Register' )} />
+				<AppButton2 title='Already registered, Sign in' onPress={e => navigation.navigate( 'Login' )} />
 			</Field>
 
 		</View>

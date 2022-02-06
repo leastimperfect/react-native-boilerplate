@@ -38,7 +38,7 @@ function LoginScreen( {navigation, user, userLogin}: LoginScreenProps<'Login'> )
 
 	useEffect( () => {
 		if ( user ) {
-			navigation.navigate( 'Root' );
+			navigation.navigate( 'Home' );
 		}
 	}, [user] )
 

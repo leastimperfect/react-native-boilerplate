@@ -23,6 +23,10 @@ import {AppTheme} from '../styles/Colors';
 const MainStack = createNativeStackNavigator<RootStackParamList>();
 
 export default function Navigation() {
+	const userSignScreensStack = <MainStack.Group>
+		<MainStack.Screen name="Login" component={LoginScreen}/>
+	</MainStack.Group>;
+
 	return (
 		<AppConsumer>
 			{( { user } ) => (
@@ -31,22 +35,24 @@ export default function Navigation() {
 						{ user ?
 							<>
 								{/* region Top level routes */}
-								<MainStack.Screen name="Root" component={TabsNavigator} options={{headerShown: false}}/>
+								<MainStack.Screen name="Home" component={TabsNavigator} options={{headerShown: false}}/>
 								<MainStack.Screen name="NotFound" component={NotFoundScreen} options={{title: 'Oops!'}}/>
+								{userSignScreensStack}
 								{/* endregion Top level routes */}
 
 								<MainStack.Group screenOptions={{presentation: 'modal'}}>
 
 									{/* region Modals */}
 									<MainStack.Screen name="Modal" component={ModalScreen} />
-									<MainStack.Screen name="Login" component={LoginScreen} />
 									{/* endregion Modals */}
 
 								</MainStack.Group>
 							</>
 							:
 							<>
-								<MainStack.Screen name="Login" component={LoginScreen} options={{headerShown: false}} />
+								{/* region User not signed in routes */}
+								{userSignScreensStack}
+								{/* endregion User not signed in routes */}
 							</>
 						}
 
